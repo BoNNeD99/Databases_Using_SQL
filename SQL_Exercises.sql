@@ -1,77 +1,85 @@
-use SEDC
+USE [master]
+GO
 
-create table [BusinessEntity]
-(
-[Id][int] NOT NULL,
-[Name][nvarchar](100) NULL,
-[Region][nvarchar](1000) NULL,
-[Zipcode][nvarchar](10) NULL,
-[Size][nvarchar](10) NULL,
+DROP DATABASE IF EXISTS [SEDC]
+GO
+
+CREATE DATABASE [SEDC]
+GO
+
+USE [SEDC]
+GO
+
+DROP TABLE IF EXISTS [dbo].[OrderDetails]
+DROP TABLE IF EXISTS [dbo].[Orders]
+DROP TABLE IF EXISTS [dbo].[BusinessEntities]
+DROP TABLE IF EXISTS [dbo].[Customers]
+DROP TABLE IF EXISTS [dbo].[Employees]
+DROP TABLE IF EXISTS [dbo].[Products]
+GO
+
+CREATE TABLE Customers (
+	[Id] int IDENTITY(1,1) NOT NULL,
+	[Name] nvarchar(100) NOT NULL,
+	[AccountNumber] nvarchar(100) NULL,
+	[City] nvarchar(100) NULL,
+	[RegionName] nvarchar(100) NULL,
+	[CustomerSize] nvarchar(10) NULL,
+	[PhoneNumber] nvarchar(20) NULL,
+	[IsActive] bit NOT NULL,
+CONSTRAINT [PK_Customers] PRIMARY KEY (Id)
 )
 
-select * from BusinessEntity
-
-create table [Employee]
-(
-[Id][int] NOT NULL,
-[FirstName][nvarchar](100) NOT NULL,
-[LastName][nvarchar](100) NOT NULL,
-[DateOfBirth][date] NULL,
-[Gender][nvarchar](1) NULL,
-[HireDate][date] NULL,
-[NationalldNumber][nvarchar](20) NULL,
-)
-select * from Employee
-
-create table [Product]
-(
-[Id][int] NOT NULL,
-[Code][nvarchar](50) NULL,
-[Name][nvarchar](100) NULL,
-[Description][nvarchar](MAX) NULL,
-[Gender][nvarchar](1) NULL,
-[Weight][decimal](18,2) NULL,
-[Price][decimal](18,2) NULL,
-[Cost][decimal](18,2) NULL,
+CREATE TABLE Employees (
+	[Id] int IDENTITY(1,1) NOT NULL,
+	[FirstName] nvarchar(100) NOT NULL,
+	[LastName] nvarchar(100) NOT NULL,
+	[DateOfBirth] date NULL, 
+	[Gender] nchar(1) NULL, -- 'F' / 'M'
+	[HireDate] date NULL,
+	[NationalIdNumber] nvarchar(20) NULL
+CONSTRAINT [PK_Employees] PRIMARY KEY (Id)
 )
 
-select * from Product
-
-create table [Customer]
-(
-[Id][int] NOT NULL,
-[Name][nvarchar](100) NOT NULL,
-[AccountNumber][nvarchar](50) NULL,
-[City][nvarchar](100) NULL,
-[RegionName][nvarchar](100) NULL,
-[CustomerSize][nvarchar](10) NULL,
-[PhoneNumber][nvarchar](20) NULL,
-[isActive][Bit] NOT NULL,
+CREATE TABLE Products (
+	[Id] int IDENTITY(1,1) NOT NULL,
+	[Code] nvarchar(50) NULL,
+	[Name] nvarchar(100) NULL,
+	[Description] nvarchar(max) NULL,
+	[Weight] decimal(18, 2) NULL,
+	[Price] decimal(18,2) NULL,
+	[Cost] decimal(18,2) NULL,
+CONSTRAINT [PK_Products] PRIMARY KEY (Id)
 )
 
-select * from Customer
 
-create table [Order]
-(
-[Id][bigint] NOT NULL,
-[OrderDate][datetime] NULL,
-[Status][smallint] NULL,
-[BusinessEntityId][int] NULL,
-[CustomerID][int] NULL,
-[EmployeeID][int] NULL,
-[TotalPrice][decimal](18,2) NULL,
-[Comment][nvarchar](MAX) NULL,
+CREATE TABLE Orders(
+	[Id] bigint IDENTITY(1,1) NOT NULL,
+	[OrderDate] date NULL,
+	[Status] smallint NULL,
+	[BusinessEntityId] int NULL,
+	[CustomerId] int NULL,
+	[EmployeeId] int NULL,
+	[TotalPrice] decimal(18,2) NULL,
+	[Comment] nvarchar(max) NULL
+CONSTRAINT [PK_Orders] PRIMARY KEY (Id)
 )
 
-select * from [Order]
-
-create table [OrderDetails]
-(
-[Id][bigint] NOT NULL,
-[OrderId][bigint] NULL,
-[ProductId][int] NULL,
-[Quantity][int] NULL,
-[Price][decimal](18,2) NULL,
+CREATE TABLE OrderDetails(
+	[Id] int IDENTITY(1,1) NOT NULL,
+	[OrderId] bigint NULL,
+	[ProductId] int NULL,
+	[Quantity] int NULL,
+	[Price] decimal(18,2) NULL,
+CONSTRAINT [PK_OrderDetails] PRIMARY KEY (Id)
 )
 
-select * from OrderDetails
+CREATE TABLE BusinessEntities(
+	[Id] int IDENTITY(1,1) NOT NULL,
+	[Name] nvarchar(100) NULL,
+	[Region] nvarchar(1000) NULL,
+	[Zipcode] nvarchar(10) NULL,
+	[Size] nvarchar(10) NULL,
+CONSTRAINT [PK_BusinessEntities] PRIMARY KEY (Id)
+)
+GO
