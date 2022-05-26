@@ -1,6 +1,24 @@
-use SEDCACADEMYDB
+USE [master]
+GO
 
-create table [Student]
+DROP DATABASE IF EXISTS [SEDCACADEMYDB]
+GO
+
+CREATE DATABASE [SEDCACADEMYDB]
+GO
+
+USE [SEDCACADEMYDB]
+GO
+
+DROP TABLE IF EXISTS [Student]
+DROP TABLE IF EXISTS [Teacher]
+DROP TABLE IF EXISTS [Grade]
+DROP TABLE IF EXISTS [Course]
+DROP TABLE IF EXISTS [GradesDetails]
+DROP TABLE IF EXISTS [AchievementType]
+
+
+CREATE TABLE [Student]
 (
 [Id][int] NOT NULL,
 [FirstName][nvarchar](100) NOT NULL,
@@ -11,10 +29,7 @@ create table [Student]
 [NationalldNumber][nvarchar](20) NULL,
 [StudentCardNumber][nvarchar](20) NULL,
 )
-
-select * from Student
-
-create table [Teacher]
+CREATE TABLE [Teacher]
 (
 [Id][int] NOT NULL,
 [FirstName][nvarchar](100) NOT NULL,
@@ -23,10 +38,7 @@ create table [Teacher]
 [AcademicRank][nvarchar](50) NOT NULL,
 [HireDate][date] NOT NULL,
 )
-
-select * from Teacher
-
-create table [Grade]
+CREATE TABLE [Grade]
 (
 [Id][int] NOT NULL,
 [StudentId][int] NOT NULL,
@@ -36,10 +48,7 @@ create table [Grade]
 [Comment][nvarchar](MAX) NULL,
 [CratedDate][date] NULL,
 )
-
-select * from Grade
-
-create table [Course]
+CREATE TABLE [Course]
 (
 [Id][int] NOT NULL,
 [Name][nvarchar](50) NOT NULL,
@@ -47,10 +56,7 @@ create table [Course]
 [AcademicYear][smallint] NOT NULL,
 [Semester][nvarchar](20) NOT NULL,
 )
-
-select * from Course
-
-create table [GradesDetails]
+CREATE TABLE [GradesDetails]
 (
 [Id][int] NOT NULL,
 [GradeId][int] NOT NULL,
@@ -59,10 +65,7 @@ create table [GradesDetails]
 [AchievementMaxPoints][smallint] NULL,
 [AchievementDate][date] NOT NULL,
 )
-
-select * from GradesDetails
-
-create table [AchievementType]
+CREATE TABLE [AchievementType]
 (
 [Id][int] NOT NULL,
 [Name][nvarchar](50) NOT NULL,
@@ -70,4 +73,11 @@ create table [AchievementType]
 [ParticipationRate][decimal](5,2) NOT NULL
 )
 
-select * from AchievementType
+
+
+SELECT * FROM [Student]
+SELECT * FROM [Teacher]
+SELECT * FROM [Grade]
+SELECT * FROM [Course]
+SELECT * FROM [GradesDetails]
+SELECT * FROM [AchievementType]
