@@ -52,7 +52,6 @@ CREATE TABLE Products (
 CONSTRAINT [PK_Products] PRIMARY KEY (Id)
 )
 
-
 CREATE TABLE Orders(
 	[Id] bigint IDENTITY(1,1) NOT NULL,
 	[OrderDate] date NULL,
