@@ -13,4 +13,5 @@ ADD CONSTRAINT CHECK_Price
 CHECK (Price <= (Cost * 2))
 
 --Change Products table to guarantee unique names across the products
-
+ALTER TABLE Products
+ADD UNIQUE(Name)
